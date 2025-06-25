@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
-import UserCard from '@/component/Usercard'
-import useSearch from '@/hooks/useSearch'
+import UserCard from '../component/Usercard'
+import useSearch from '../hooks/useSearch'
 import { Search, Star, Building2 } from 'lucide-react'
 
 export default function Home() {

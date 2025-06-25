@@ -1,6 +1,6 @@
 import './globals.css'
-import Navbar from '@/component/Navbar'
-import Sidebar from '@/component/Sidebar'
+import Navbar from '../component/Navbar'
+import Sidebar from '../component/Sidebar'
 
 export const metadata = {
   title: 'HR Dashboard',
