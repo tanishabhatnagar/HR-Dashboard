@@ -1,6 +1,8 @@
 'use client'
+
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
+import { UserCircle2, Mail, Phone, MapPin } from 'lucide-react'
 
 const tabs = ['Overview', 'Projects', 'Feedback']
 
@@ -47,15 +49,35 @@ export default function EmployeeDetails() {
   if (error) return <div className="text-center text-red-500">{error}</div>
 
   return (
-    <div className="bg-third p-6 rounded-xl space-y-6 text-white">
-      <h1 className="text-2xl font-bold">
-        {user.firstName} {user.lastName}
-      </h1>
-      <p className="text-gray-300">{user.bio}</p>
-      <p className="text-sm text-gray-400">Department: {user.department}</p>
-      <p className="text-sm text-gray-400">Email: {user.email}</p>
-      <p className="text-sm text-gray-400">Phone: {user.phone}</p>
-      <p className="text-sm text-gray-400">Address: {user.address}</p>
+    <div className="bg-white p-6 rounded-xl space-y-6 text-gray-800 max-w-3xl mx-auto shadow-md">
+      <div className="flex items-center gap-4">
+        <img
+          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${user.firstName + user.lastName + user.id}`}
+          alt="avatar"
+          className="w-20 h-20 rounded-full border border-gray-300"
+        />
+        <div>
+          <h1 className="text-2xl font-bold">
+            {user.firstName} {user.lastName}
+          </h1>
+          <p className="text-sm text-gray-500">{user.bio}</p>
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="flex items-center gap-2 text-sm text-gray-600">
+          <UserCircle2 size={16} /> {user.department}
+        </div>
+        <div className="flex items-center gap-2 text-sm text-gray-600">
+          <Mail size={16} /> {user.email}
+        </div>
+        <div className="flex items-center gap-2 text-sm text-gray-600">
+          <Phone size={16} /> {user.phone}
+        </div>
+        <div className="flex items-center gap-2 text-sm text-gray-600">
+          <MapPin size={16} /> {user.address}
+        </div>
+      </div>
 
       {/* Tabs */}
       <div className="flex gap-4 mt-4">
@@ -63,10 +85,10 @@ export default function EmployeeDetails() {
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`px-4 py-2 rounded-xl ${
+            className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm ${
               activeTab === tab
-                ? 'bg-first text-white'
-                : 'bg-fourth text-gray-300 hover:bg-second'
+                ? 'bg-[#4F0DCE] text-white'
+                : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
             {tab}
@@ -75,12 +97,12 @@ export default function EmployeeDetails() {
       </div>
 
       {/* Tab Content */}
-      <div className="bg-fourth p-4 rounded-xl mt-2">
+      <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
         {activeTab === 'Overview' && (
-          <div>
+          <div className="space-y-2">
             <p>
               <strong>Performance Rating:</strong>{' '}
-              <span className="text-first">{user.rating} / 5</span>
+              <span className="text-[#4F0DCE]">{user.rating} / 5</span>
             </p>
             <p>
               <strong>Experience:</strong> 5+ years
@@ -88,7 +110,7 @@ export default function EmployeeDetails() {
           </div>
         )}
         {activeTab === 'Projects' && (
-          <ul className="list-disc ml-5">
+          <ul className="list-disc ml-5 text-sm space-y-1">
             <li>Team Collaboration Tool</li>
             <li>Performance Tracker App</li>
             <li>Remote Work Dashboard</li>
@@ -99,11 +121,11 @@ export default function EmployeeDetails() {
             <textarea
               rows="3"
               placeholder="Leave feedback..."
-              className="w-full p-2 rounded-md text-black"
+              className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#4F0DCE] text-gray-800"
             />
             <button
               type="submit"
-              className="bg-first px-4 py-2 rounded-xl hover:bg-second"
+              className="bg-[#4F0DCE] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#5B46D3] transition"
             >
               Submit Feedback
             </button>

@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
           {/* Main content area with Navbar and children */}
           <div className="flex flex-col flex-1">
             <Navbar /> {/* Navbar now appears at the top, after sidebar */}
-            <main className="flex-1 bg-[#f9fafb] p-4 overflow-auto">
+            <main className="flex-1 bg-[#f9fafb]  overflow-auto">
               {children}
             </main>
           </div>

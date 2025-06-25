@@ -1,5 +1,3 @@
-
-// app/bookmarks/page.js
 'use client'
 import { useEffect, useState } from 'react'
 import UserCard from '@/component/UserCard'
@@ -17,14 +15,23 @@ export default function BookmarksPage() {
   }
 
   return (
-    <div>
-      <h1 className="text-2xl font-bold mb-4">Bookmarked Employees</h1>
+    <div className="max-w-6xl mx-auto p-6">
+      <h1 className="text-3xl font-bold text-[#4F0DCE] mb-6">
+        ⭐ Bookmarked Employees
+      </h1>
+
       {bookmarkedUsers.length === 0 ? (
-        <p className="text-gray-600 text-center mt-10">📄 Start bookmarking your favorite employees!</p>
+        <div className="bg-blue-50 border border-blue-200 text-blue-700 text-center py-12 rounded-xl shadow-sm">
+          📄 You haven’t bookmarked anyone yet. Browse the dashboard and tap the ⭐ to save your favorite employees.
+        </div>
       ) : (
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {bookmarkedUsers.map((user) => (
-            <UserCard key={user.id} user={user} onBookmarkChange={handleBookmarkChange} />
+            <UserCard
+              key={user.id}
+              user={user}
+              onBookmarkChange={handleBookmarkChange}
+            />
           ))}
         </div>
       )}

@@ -58,57 +58,66 @@ export default function Home() {
   if (error) return <div className="text-center text-red-500">{error}</div>
 
   return (
-    <div className="space-y-6 bg-[#FCFCFC] min-h-screen p-4">
-      <div className="bg-white p-4 rounded-xl shadow flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="relative w-full sm:w-1/3">
-          <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
-          <input
-            type="text"
-            placeholder="Search by name, email..."
-            className="w-full pl-10 pr-4 py-2 rounded-lg text-black border border-gray-300"
-            value={query}
-            onChange={(e) => {
-              setQuery(e.target.value)
-              setCurrentPage(1)
-            }}
-          />
-        </div>
+    <div className="space-y-6 min-h-screen bg-white p-4">
+      {/* Filters */}
+     {/* Filters */}
+<div className="p-4 rounded-xl flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+  {/* Search Bar */}
+  <div className="relative w-full sm:w-1/2">
+    <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
+    <input
+      type="text"
+      placeholder="Search by name, email..."
+      className="w-full bg-white pl-10 pr-4 py-2 rounded-lg text-black border border-gray-300"
+      value={query}
+      onChange={(e) => {
+        setQuery(e.target.value)
+        setCurrentPage(1)
+      }}
+    />
+  </div>
 
-        <div className="relative w-full sm:w-1/3">
-          <Building2 className="absolute left-3 top-2.5 text-gray-400" size={18} />
-          <select
-            className="w-full pl-10 pr-4 py-2 rounded-lg text-black border border-gray-300"
-            value={filterDept[0] || ''}
-            onChange={(e) => {
-              setFilterDept([e.target.value])
-              setCurrentPage(1)
-            }}
-          >
-            <option value="">Filter by Department</option>
-            {departments.map((dept) => (
-              <option key={dept} value={dept}>{dept}</option>
-            ))}
-          </select>
-        </div>
+  {/* Department Filter */}
+  <div className="relative w-full sm:w-1/4">
+    <Building2 className="absolute left-3 top-2.5 text-gray-400" size={18} />
+    <select
+      className="w-full pl-10 pr-4 py-2 rounded-lg text-black border border-gray-300 bg-white"
+      value={filterDept[0] || ''}
+      onChange={(e) => {
+        setFilterDept(e.target.value === 'ALL' ? [] : [e.target.value])
+        setCurrentPage(1)
+      }}
+    >
+      <option value="" disabled>Filter by Department</option>
+      <option value="ALL">All</option>
+      {departments.map((dept) => (
+        <option key={dept} value={dept}>{dept}</option>
+      ))}
+    </select>
+  </div>
 
-        <div className="relative w-full sm:w-1/3">
-          <Star className="absolute left-3 top-2.5 text-gray-400" size={18} />
-          <select
-            className="w-full pl-10 pr-4 py-2 rounded-lg text-black border border-gray-300"
-            value={filterRating[0] || ''}
-            onChange={(e) => {
-              setFilterRating([Number(e.target.value)])
-              setCurrentPage(1)
-            }}
-          >
-            <option value="">Filter by Rating</option>
-            {ratings.map((r) => (
-              <option key={r} value={r}>{r} Star</option>
-            ))}
-          </select>
-        </div>
-      </div>
+  {/* Rating Filter */}
+  <div className="relative w-full sm:w-1/4">
+    <Star className="absolute left-3 top-2.5 text-gray-400" size={18} />
+    <select
+      className="w-full pl-10 pr-4 py-2 rounded-lg text-black border border-gray-300 bg-white"
+      value={filterRating[0] || ''}
+      onChange={(e) => {
+        setFilterRating(e.target.value === 'ALL' ? [] : [Number(e.target.value)])
+        setCurrentPage(1)
+      }}
+    >
+      <option value="" disabled>Filter by Rating</option>
+      <option value="ALL">All</option>
+      {ratings.map((r) => (
+        <option key={r} value={r}>{r} Star</option>
+      ))}
+    </select>
+  </div>
+</div>
 
+
+      {/* Users */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {currentUsers.length === 0 ? (
           <p className="text-gray-500 text-center col-span-full">No matching users.</p>
@@ -119,6 +128,7 @@ export default function Home() {
         )}
       </section>
 
+      {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center items-center gap-2 mt-6 flex-wrap text-sm">
           <button
