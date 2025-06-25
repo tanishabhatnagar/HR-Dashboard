@@ -1,6 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
-import UserCard from '@/component/UserCard'
+import UserCard from './../../component/Usercard'
 
 export default function BookmarksPage() {
   const [bookmarkedUsers, setBookmarkedUsers] = useState([])
