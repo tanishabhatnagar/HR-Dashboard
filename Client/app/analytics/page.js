@@ -77,7 +77,7 @@ export default function AnalyticsPage() {
         {
           label: 'Average Rating',
           data: averageRatings,
-          backgroundColor: '#f70776',
+          backgroundColor: '#1D4ED8',
         },
       ],
     })
@@ -89,26 +89,28 @@ export default function AnalyticsPage() {
       {
         label: 'Bookmarks',
         data: [5, 8, 12, 9, 15, 20],
-        borderColor: '#c3195d',
-        backgroundColor: '#f70776',
+        borderColor: '#1D4ED8',
+        backgroundColor: '#60A5FA',
+        fill: true,
+        tension: 0.4,
       },
     ],
   }
 
   return (
-    <div className="p-6 space-y-8 bg-white text-black rounded-2xl shadow-md">
-      <h1 className="text-2xl font-bold text-center">📊 Analytics Dashboard</h1>
+    <div className="p-6 space-y-8 bg-[#F9FAFB] text-black rounded-2xl min-h-screen">
+      <h1 className="text-3xl font-extrabold text-center text-[#1D4ED8]">📊 Analytics Dashboard</h1>
 
       {/* Dropdown Filter */}
       <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
-        <label htmlFor="dept-filter" className="text-sm font-medium">
+        <label htmlFor="dept-filter" className="text-sm font-medium text-[#1E3A8A]">
           Filter by Department:
         </label>
         <select
           id="dept-filter"
           value={filteredDept}
           onChange={(e) => setFilteredDept(e.target.value)}
-          className="border border-gray-300 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-pink-400"
+          className="border border-blue-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-[#1E3A8A]"
         >
           {departments.map((dept) => (
             <option key={dept} value={dept}>
@@ -120,9 +122,9 @@ export default function AnalyticsPage() {
 
       {/* Charts */}
       <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 shadow">
-          <h2 className="text-lg font-semibold mb-2 text-pink-600">
-            Department-wise Average Ratings
+        <div className="bg-white p-6 rounded-2xl border border-blue-100 shadow-lg hover:shadow-xl transition">
+          <h2 className="text-lg font-semibold mb-4 text-[#1D4ED8]">
+            📈 Department-wise Average Ratings
           </h2>
           {departmentData ? (
             <Bar data={departmentData} options={{ responsive: true }} />
@@ -131,9 +133,9 @@ export default function AnalyticsPage() {
           )}
         </div>
 
-        <div className="bg-gray-50 p-4 rounded-xl border border-gray-200 shadow">
-          <h2 className="text-lg font-semibold mb-2 text-pink-600">
-            Bookmark Trends (Mocked)
+        <div className="bg-white p-6 rounded-2xl border border-blue-100 shadow-lg hover:shadow-xl transition">
+          <h2 className="text-lg font-semibold mb-4 text-[#1D4ED8]">
+            📌 Bookmark Trends (Mocked)
           </h2>
           <Line data={bookmarkData} options={{ responsive: true }} />
         </div>
