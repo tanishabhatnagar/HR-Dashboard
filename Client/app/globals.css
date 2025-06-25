@@ -1,0 +1,23 @@
+@import "tailwindcss";
+
+@tailwind utilities;
+
+/* Base light theme styles */
+body {
+  @apply bg-white text-black;
+}
+
+p,
+span,
+li,
+a,
+label {
+  @apply text-gray-700;
+}
+
+/* Pink theme buttons (optional for non-Tailwind users) */
+:root {
+  --color-first: #f70776;
+  --color-second: #c3195d;
+  --color-third: #680747;
+}
