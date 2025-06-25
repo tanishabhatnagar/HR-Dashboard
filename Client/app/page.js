@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react'
 import UserCard from '@/component/Usercard'
 import useSearch from '@/hooks/useSearch'
+import { Search, Star, Building2 } from 'lucide-react'
 
 export default function Home() {
   const [users, setUsers] = useState([])
@@ -11,7 +12,7 @@ export default function Home() {
   useEffect(() => {
     async function fetchUsers() {
       try {
-        const res = await fetch('https://dummyjson.com/users?limit=20')
+        const res = await fetch('https://dummyjson.com/users?limit=100')
         const data = await res.json()
         const enhancedUsers = data.users.map((user) => ({
           ...user,
@@ -47,45 +48,60 @@ export default function Home() {
   const departments = [...new Set(users.map((u) => u.department))]
   const ratings = [1, 2, 3, 4, 5]
 
+  const usersPerPage = 6
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = Math.ceil(filteredUsers.length / usersPerPage)
+  const startIndex = (currentPage - 1) * usersPerPage
+  const currentUsers = filteredUsers.slice(startIndex, startIndex + usersPerPage)
+
   if (loading) return <div className="text-center mt-10">Loading users...</div>
   if (error) return <div className="text-center text-red-500">{error}</div>
 
   return (
-    <div className="space-y-6">
-      {/* Search and Filter */}
-      <div className="bg-third p-4 rounded-xl space-y-4">
-        <input
-          type="text"
-          placeholder="Search by name, email, or department..."
-          className="w-full p-2 rounded-lg text-black"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
+    <div className="space-y-6 bg-[#FCFCFC] min-h-screen p-4">
+      <div className="bg-white p-4 rounded-xl shadow flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="relative w-full sm:w-1/3">
+          <Search className="absolute left-3 top-2.5 text-gray-400" size={18} />
+          <input
+            type="text"
+            placeholder="Search by name, email..."
+            className="w-full pl-10 pr-4 py-2 rounded-lg text-black border border-gray-300"
+            value={query}
+            onChange={(e) => {
+              setQuery(e.target.value)
+              setCurrentPage(1)
+            }}
+          />
+        </div>
 
-        <div className="flex flex-col sm:flex-row gap-4">
+        <div className="relative w-full sm:w-1/3">
+          <Building2 className="absolute left-3 top-2.5 text-gray-400" size={18} />
           <select
-            multiple
-            className="flex-1 p-2 rounded-lg text-black"
-            value={filterDept}
-            onChange={(e) =>
-              setFilterDept(Array.from(e.target.selectedOptions, (opt) => opt.value))
-            }
+            className="w-full pl-10 pr-4 py-2 rounded-lg text-black border border-gray-300"
+            value={filterDept[0] || ''}
+            onChange={(e) => {
+              setFilterDept([e.target.value])
+              setCurrentPage(1)
+            }}
           >
-            <option disabled value="">Filter by Department</option>
+            <option value="">Filter by Department</option>
             {departments.map((dept) => (
               <option key={dept} value={dept}>{dept}</option>
             ))}
           </select>
+        </div>
 
+        <div className="relative w-full sm:w-1/3">
+          <Star className="absolute left-3 top-2.5 text-gray-400" size={18} />
           <select
-            multiple
-            className="flex-1 p-2 rounded-lg text-black"
-            value={filterRating}
-            onChange={(e) =>
-              setFilterRating(Array.from(e.target.selectedOptions, (opt) => Number(opt.value)))
-            }
+            className="w-full pl-10 pr-4 py-2 rounded-lg text-black border border-gray-300"
+            value={filterRating[0] || ''}
+            onChange={(e) => {
+              setFilterRating([Number(e.target.value)])
+              setCurrentPage(1)
+            }}
           >
-            <option disabled value="">Filter by Rating</option>
+            <option value="">Filter by Rating</option>
             {ratings.map((r) => (
               <option key={r} value={r}>{r} Star</option>
             ))}
@@ -93,16 +109,60 @@ export default function Home() {
         </div>
       </div>
 
-      {/* User Cards */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {filteredUsers.length === 0 ? (
-          <p className="text-gray-400 text-center col-span-full">No matching users.</p>
+        {currentUsers.length === 0 ? (
+          <p className="text-gray-500 text-center col-span-full">No matching users.</p>
         ) : (
-          filteredUsers.map((user) => (
+          currentUsers.map((user) => (
             <UserCard key={user.id} user={user} />
           ))
         )}
       </section>
+
+      {totalPages > 1 && (
+        <div className="flex justify-center items-center gap-2 mt-6 flex-wrap text-sm">
+          <button
+            onClick={() => setCurrentPage(1)}
+            disabled={currentPage === 1}
+            className="px-3 py-1 rounded-lg bg-[#E0E0E0] hover:bg-[#D0D0D0] transition disabled:opacity-50"
+          >
+            &laquo;
+          </button>
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1)
+            .filter((page) =>
+              page === 1 ||
+              page === totalPages ||
+              (page >= currentPage - 2 && page <= currentPage + 2)
+            )
+            .map((page, index, arr) => {
+              const isEllipsis = index > 0 && page !== arr[index - 1] + 1
+              return (
+                <div key={page} className="flex items-center">
+                  {isEllipsis && <span className="px-2">...</span>}
+                  <button
+                    onClick={() => setCurrentPage(page)}
+                    className={`px-3 py-1 rounded-lg transition ${
+                      currentPage === page
+                        ? 'bg-[#4F0DCE] text-white'
+                        : 'bg-[#E0E0E0] hover:bg-[#D0D0D0]'
+                    }`}
+                  >
+                    {page}
+                  </button>
+                </div>
+              )
+            })}
+
+          <button
+            onClick={() => setCurrentPage(totalPages)}
+            disabled={currentPage === totalPages}
+            className="px-3 py-1 rounded-lg bg-[#E0E0E0] hover:bg-[#D0D0D0] transition disabled:opacity-50"
+          >
+            &raquo;
+          </button>
+        </div>
+      )}
     </div>
   )
 }

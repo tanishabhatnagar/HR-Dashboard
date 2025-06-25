@@ -1,7 +1,6 @@
 import './globals.css'
 import Navbar from '@/component/Navbar'
 import Sidebar from '@/component/Sidebar'
-import { BookmarkProvider } from '@/context/BookmarkContext'
 
 export const metadata = {
   title: 'HR Dashboard',
@@ -11,14 +10,19 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className="flex flex-col md:flex-row min-h-screen bg-fourth text-white">
-        <BookmarkProvider>
+      <body className="min-h-screen bg-white text-black">
+        <div className="flex h-screen">
+          {/* Sidebar on the left, full height */}
           <Sidebar />
-          <div className="flex-1">
-            <Navbar />
-            <main className="p-4">{children}</main>
+
+          {/* Main content area with Navbar and children */}
+          <div className="flex flex-col flex-1">
+            <Navbar /> {/* Navbar now appears at the top, after sidebar */}
+            <main className="flex-1 bg-[#f9fafb] p-4 overflow-auto">
+              {children}
+            </main>
           </div>
-        </BookmarkProvider>
+        </div>
       </body>
     </html>
   )
