@@ -97,7 +97,6 @@ export default function EmployeeDetails() {
         </div>
       </div>
 
-      {/* Tabs */}
       <div className="flex gap-4 mt-4">
         {tabs.map((tab) => (
           <button

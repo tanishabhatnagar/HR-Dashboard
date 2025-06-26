@@ -9,7 +9,7 @@ import {
   BarChart2,
   Menu,
   X,
-  UserPlus, // ✅ icon for Create User
+  UserPlus, 
 } from 'lucide-react'
 
 export default function Sidebar() {
@@ -20,7 +20,7 @@ export default function Sidebar() {
     { href: '/', label: 'Dashboard', icon: LayoutDashboard },
     { href: '/bookmarks', label: 'Bookmarks', icon: Bookmark },
     { href: '/analytics', label: 'Analytics', icon: BarChart2 },
-    { href: '/create-user', label: 'Create User', icon: UserPlus }, // ✅ Added new tab
+    { href: '/create-user', label: 'Create User', icon: UserPlus }, 
   ]
 
   return (

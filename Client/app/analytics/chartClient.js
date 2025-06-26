@@ -102,7 +102,7 @@ export default function ChartClient({ users }) {
       </div>
 
       <div className="grid md:grid-cols-2 gap-6 mt-6">
-        <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition">
           <h2 className="text-lg font-semibold mb-4 text-[#1D4ED8] dark:text-blue-400">
             📈 Department-wise Average Ratings
           </h2>
@@ -113,9 +113,9 @@ export default function ChartClient({ users }) {
           )}
         </div>
 
-        <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition">
+        <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition">
           <h2 className="text-lg font-semibold mb-4 text-[#1D4ED8] dark:text-blue-400">
-            📌 Bookmark Trends (Mocked)
+            📌 Bookmark Trends 
           </h2>
           <Line data={bookmarkData} options={{ responsive: true }} />
         </div>
