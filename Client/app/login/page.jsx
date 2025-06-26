@@ -20,10 +20,10 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen bg-blue-50 dark:bg-blue-950">
+    <div className="flex items-center justify-center h-screen bg-white dark:bg-black">
       <form
         onSubmit={handleLogin}
-        className="bg-white dark:bg-blue-900 text-black dark:text-white p-8 rounded-xl shadow-md w-full max-w-sm space-y-4"
+        className="bg-white dark:bg-gray-900 text-black dark:text-white p-8 rounded-xl shadow-md w-full max-w-sm space-y-4"
       >
         <h2 className="text-2xl font-bold text-center">Login</h2>
         {error && <p className="text-red-500 text-sm">{error}</p>}
@@ -31,7 +31,7 @@ export default function LoginPage() {
         <input
           type="email"
           placeholder="Email"
-          className="w-full p-2 border border-gray-300 rounded dark:bg-blue-800 dark:border-blue-700"
+          className="w-full p-2 border border-gray-300 rounded dark:bg-gray-800 dark:border-gray-700"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
