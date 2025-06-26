@@ -5,21 +5,20 @@ A responsive and feature-rich HR Dashboard built with **Next.js App Router**, **
 ---
 ## 🚀 Live Demo & Preview
 
-🔗 **Deployed App**: [https://hr-matrix-flame.vercel.app/login](https://hr-matrix-flame.vercel.app/login)
+🔗 **Deployed App**: [https://hr-matrix-flame.vercel.app](https://hr-matrix-flame.vercel.app)
 
-🎥 **Screen Recording**:  
-[![Watch the video](https://img.youtube.com/vi/abc123XYZ/hqdefault.jpg)](https://www.youtube.com/watch?v=abc123XYZ)
+🎥 **Screen Recording**: [![Watch the video](https://www.youtube.com/watch?v=6EXQbavIgrc)](https://www.youtube.com/watch?v=6EXQbavIgrcZ)
 
 
 ## 🧰 Tech Stack
 
-- ⚡ **Next.js **
-- 🎨 **Tailwind CSS**
-- 📊 **Chart.js**
-- 🔐 **Cookie-based Login Authentication**
-- 🌗 **Dark/Light Mode Support**
-- 🧠 **Context API for State Management**
-- 🧩 **Reusable Components & Custom Hooks**
+- **Next.js**
+- **Tailwind CSS**
+- **Chart.js**
+- **Cookie-based Login Authentication**
+- **Dark/Light Mode Support**
+- **Context API for State Management**
+- **Reusable Components & Custom Hooks**
 
 ---
 
