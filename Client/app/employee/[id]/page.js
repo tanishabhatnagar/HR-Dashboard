@@ -87,7 +87,7 @@ export default function EmployeeDetails() {
             onClick={() => setActiveTab(tab)}
             className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors shadow-sm ${
               activeTab === tab
-                ? 'bg-[#4F0DCE] text-white'
+                ? 'bg-[#2563eb] text-white'
                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
             }`}
           >
@@ -96,13 +96,12 @@ export default function EmployeeDetails() {
         ))}
       </div>
 
-      {/* Tab Content */}
       <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
         {activeTab === 'Overview' && (
           <div className="space-y-2">
             <p>
               <strong>Performance Rating:</strong>{' '}
-              <span className="text-[#4F0DCE]">{user.rating} / 5</span>
+              <span className="text-[#2563eb]">{user.rating} / 5</span>
             </p>
             <p>
               <strong>Experience:</strong> 5+ years
@@ -121,11 +120,11 @@ export default function EmployeeDetails() {
             <textarea
               rows="3"
               placeholder="Leave feedback..."
-              className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#4F0DCE] text-gray-800"
+              className="w-full p-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#2563eb] text-gray-800"
             />
             <button
               type="submit"
-              className="bg-[#4F0DCE] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#5B46D3] transition"
+              className="bg-[#2563eb] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#5B46D3] transition"
             >
               Submit Feedback
             </button>

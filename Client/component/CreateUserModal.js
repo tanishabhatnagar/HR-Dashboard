@@ -1,7 +1,6 @@
-// components/CreateUserModal.js
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { X } from 'lucide-react'
 
 export default function CreateUserModal({ isOpen, onClose, onUserCreated }) {
@@ -13,22 +12,55 @@ export default function CreateUserModal({ isOpen, onClose, onUserCreated }) {
     department: '',
     rating: 1,
   })
+
   const [error, setError] = useState('')
+  const [existingEmails, setExistingEmails] = useState([])
 
   const departments = ['Engineering', 'HR', 'Sales', 'Design', 'Marketing']
+
+  useEffect(() => {
+    const stored = JSON.parse(localStorage.getItem('customUsers') || '[]')
+    const emails = stored.map(user => user.email.toLowerCase())
+    setExistingEmails(emails)
+  }, [])
 
   const handleChange = (e) => {
     const { name, value } = e.target
     setForm({ ...form, [name]: value })
   }
 
-  const handleSubmit = () => {
-    // Basic validation
-    if (!form.firstName || !form.lastName || !form.email || !form.age || !form.department) {
-      return setError('Please fill all fields.')
+  const validate = () => {
+    const { firstName, lastName, email, age, department } = form
+
+    if (!firstName || !lastName || !email || !age || !department) {
+      return 'Please fill all fields.'
     }
-    if (isNaN(form.age) || Number(form.age) <= 0) {
-      return setError('Age must be a valid number.')
+
+    if (!/^[a-zA-Z\s]+$/.test(firstName) || !/^[a-zA-Z\s]+$/.test(lastName)) {
+      return 'Names should only contain letters and spaces.'
+    }
+
+    if (!/^\S+@\S+\.\S+$/.test(email)) {
+      return 'Invalid email format.'
+    }
+
+    if (existingEmails.includes(email.toLowerCase())) {
+      return 'This email already exists.'
+    }
+
+    const ageNumber = Number(age)
+    if (isNaN(ageNumber) || ageNumber < 18 || ageNumber > 65) {
+      return 'Age must be a number between 18 and 65.'
+    }
+
+    return ''
+  }
+
+  const handleSubmit = () => {
+    const validationError = validate()
+    if (validationError) {
+      setError(validationError)
+      return
     }
 
     const newUser = {
@@ -43,7 +75,15 @@ export default function CreateUserModal({ isOpen, onClose, onUserCreated }) {
     localStorage.setItem('customUsers', JSON.stringify(updated))
     onUserCreated(newUser)
     onClose()
-    setForm({ firstName: '', lastName: '', email: '', age: '', department: '', rating: 1 })
+
+    setForm({
+      firstName: '',
+      lastName: '',
+      email: '',
+      age: '',
+      department: '',
+      rating: 1,
+    })
     setError('')
   }
 
@@ -58,15 +98,21 @@ export default function CreateUserModal({ isOpen, onClose, onUserCreated }) {
         <h2 className="text-xl font-bold mb-4">Create New User</h2>
 
         <div className="space-y-3">
-          <input name="firstName" placeholder="First Name" className="w-full p-2 border rounded" onChange={handleChange} value={form.firstName} />
-          <input name="lastName" placeholder="Last Name" className="w-full p-2 border rounded" onChange={handleChange} value={form.lastName} />
-          <input name="email" placeholder="Email" className="w-full p-2 border rounded" onChange={handleChange} value={form.email} />
-          <input name="age" placeholder="Age" className="w-full p-2 border rounded" onChange={handleChange} value={form.age} />
-          <select name="department" className="w-full p-2 border rounded" onChange={handleChange} value={form.department}>
+          <input name="firstName" placeholder="First Name" className="w-full p-2 border rounded"
+            onChange={handleChange} value={form.firstName} />
+          <input name="lastName" placeholder="Last Name" className="w-full p-2 border rounded"
+            onChange={handleChange} value={form.lastName} />
+          <input name="email" placeholder="Email" className="w-full p-2 border rounded"
+            onChange={handleChange} value={form.email} />
+          <input name="age" placeholder="Age" className="w-full p-2 border rounded"
+            onChange={handleChange} value={form.age} />
+          <select name="department" className="w-full p-2 border rounded"
+            onChange={handleChange} value={form.department}>
             <option value="">Select Department</option>
             {departments.map(dep => <option key={dep} value={dep}>{dep}</option>)}
           </select>
-          <select name="rating" className="w-full p-2 border rounded" onChange={handleChange} value={form.rating}>
+          <select name="rating" className="w-full p-2 border rounded"
+            onChange={handleChange} value={form.rating}>
             {[1, 2, 3, 4, 5].map(r => <option key={r} value={r}>{r} Star</option>)}
           </select>
         </div>
@@ -74,12 +120,11 @@ export default function CreateUserModal({ isOpen, onClose, onUserCreated }) {
         {error && <p className="text-red-500 mt-2 text-sm">{error}</p>}
 
         <button
-  onClick={handleSubmit}
-  className="bg-[#f70776] text-white px-4 py-2 rounded-xl mt-4 w-full hover:bg-[#c3195d] transition"
->
-  Create User
-</button>
-
+          onClick={handleSubmit}
+          className="bg-[#2563eb] text-white px-4 py-2 rounded-xl mt-4 w-full hover:bg-[#c3195d] transition"
+        >
+          Create User
+        </button>
       </div>
     </div>
   )

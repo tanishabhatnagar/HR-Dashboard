@@ -9,16 +9,13 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className="min-h-screen bg-white text-black">
+    <html lang="en" suppressHydrationWarning>
+      <body className="min-h-screen bg-white text-black dark:bg-black dark:text-white">
         <div className="flex h-screen">
-          {/* Sidebar on the left, full height */}
           <Sidebar />
-
-          {/* Main content area with Navbar and children */}
           <div className="flex flex-col flex-1">
-            <Navbar /> {/* Navbar now appears at the top, after sidebar */}
-            <main className="flex-1 bg-[#f9fafb]  overflow-auto">
+            <Navbar />
+            <main className="flex-1 bg-[#f9fafb] dark:bg-[#1e1e1e] overflow-auto">
               {children}
             </main>
           </div>

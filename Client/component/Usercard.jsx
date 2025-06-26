@@ -2,15 +2,19 @@
 import { useState, useEffect } from 'react'
 import RatingStars from './RatingStars'
 import { useRouter } from 'next/navigation'
-import { Bookmark, BookmarkCheck } from 'lucide-react'
+import { Bookmark, BookmarkCheck, CheckCircle } from 'lucide-react'
 
 export default function UserCard({ user, onBookmarkChange }) {
   const router = useRouter()
   const [bookmarked, setBookmarked] = useState(false)
+  const [promoted, setPromoted] = useState(false)
 
   useEffect(() => {
     const bookmarks = JSON.parse(localStorage.getItem('bookmarkedUsers') || '[]')
     setBookmarked(bookmarks.some((u) => u.id === user.id))
+
+    const promotedUsers = JSON.parse(localStorage.getItem('promotedUsers') || '[]')
+    setPromoted(promotedUsers.includes(user.id))
   }, [user.id])
 
   const toggleBookmark = () => {
@@ -26,17 +30,26 @@ export default function UserCard({ user, onBookmarkChange }) {
     if (onBookmarkChange) onBookmarkChange(updatedBookmarks)
   }
 
+  const togglePromote = () => {
+    let promotedUsers = JSON.parse(localStorage.getItem('promotedUsers') || '[]')
+    if (promoted) {
+      promotedUsers = promotedUsers.filter(id => id !== user.id)
+    } else {
+      promotedUsers.push(user.id)
+    }
+    localStorage.setItem('promotedUsers', JSON.stringify(promotedUsers))
+    setPromoted(!promoted)
+  }
+
   return (
     <div className="bg-white text-black p-5 flex flex-col gap-4 border border-gray-200 rounded-xl transition shadow hover:shadow-md">
       {/* Avatar and Info */}
       <div className="flex items-center gap-4">
         <img
- src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(user.firstName + user.lastName + user.id)}`}
-
-
-  alt={`${user.firstName} ${user.lastName}`}
-  className="w-14 h-14 rounded-full object-cover border border-gray-300 bg-white"
-/>
+          src={`https://api.dicebear.com/7.x/avataaars/svg?seed=${encodeURIComponent(user.firstName + user.lastName + user.id)}`}
+          alt={`${user.firstName} ${user.lastName}`}
+          className="w-14 h-14 rounded-full object-cover border border-gray-300 bg-white"
+        />
 
         <div>
           <h2 className="text-lg font-semibold">{user.firstName} {user.lastName} ({user.age})</h2>
@@ -61,10 +74,14 @@ export default function UserCard({ user, onBookmarkChange }) {
           </button>
 
           <button
-            onClick={() => alert('Promoted!')}
-            className="bg-[#4F0DCE] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#5B46D3] transition"
+            onClick={togglePromote}
+            className={`px-4 py-2 rounded-lg text-sm flex items-center gap-1 transition ${
+              promoted
+                ? 'bg-green-600 text-white hover:bg-green-700'
+                : 'bg-[#2563eb] text-white hover:bg-[#5B46D3]'
+            }`}
           >
-            Promote
+            {promoted ? <><CheckCircle size={16} /> Promoted</> : 'Promote'}
           </button>
         </div>
 
