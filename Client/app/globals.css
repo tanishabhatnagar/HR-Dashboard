@@ -1,27 +1,14 @@
-@import "tailwindcss";
 
+
+ @import "tailwindcss";
+
+/* Enable class-based dark mode */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Tailwind utilities */
 @tailwind utilities;
+
+/* Optional base styles */
 body {
   @apply bg-white text-black;
-}
-
-p,
-span,
-li,
-a,
-label {
-  @apply text-gray-700;
-}
-
-html.dark body {
-  background-color: black;
-  color: white;
-}
-
-html.dark p,
-html.dark span,
-html.dark li,
-html.dark a,
-html.dark label {
-  color: #d1d5db; 
 }

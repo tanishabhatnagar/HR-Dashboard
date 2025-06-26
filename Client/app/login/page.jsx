@@ -12,7 +12,7 @@ export default function LoginPage() {
   const handleLogin = (e) => {
     e.preventDefault()
     if (email && password) {
-      Cookies.set('auth', 'true', { expires: 1 }) // ✅ Set cookie
+      Cookies.set('auth', 'true', { expires: 1 }) 
       router.push('/')
     } else {
       setError('Please enter email and password')

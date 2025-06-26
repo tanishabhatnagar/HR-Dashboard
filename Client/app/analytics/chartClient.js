@@ -81,14 +81,17 @@ export default function ChartClient({ users }) {
   return (
     <>
       <div className="flex flex-col sm:flex-row gap-4 sm:items-center">
-        <label htmlFor="dept-filter" className="text-sm font-medium text-[#1E3A8A]">
+        <label
+          htmlFor="dept-filter"
+          className="text-sm font-medium text-[#1E3A8A] dark:text-blue-300"
+        >
           Filter by Department:
         </label>
         <select
           id="dept-filter"
           value={filteredDept}
           onChange={(e) => setFilteredDept(e.target.value)}
-          className="border border-blue-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white text-[#1E3A8A]"
+          className="border border-blue-300 dark:border-blue-600 rounded-lg px-4 py-2 text-sm bg-white dark:bg-gray-800 text-[#1E3A8A] dark:text-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500"
         >
           {departments.map((dept) => (
             <option key={dept} value={dept}>
@@ -99,19 +102,19 @@ export default function ChartClient({ users }) {
       </div>
 
       <div className="grid md:grid-cols-2 gap-6 mt-6">
-        <div className="bg-white p-6 rounded-2xl border border-blue-100 shadow-lg hover:shadow-xl transition">
-          <h2 className="text-lg font-semibold mb-4 text-[#1D4ED8]">
+        <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition">
+          <h2 className="text-lg font-semibold mb-4 text-[#1D4ED8] dark:text-blue-400">
             📈 Department-wise Average Ratings
           </h2>
           {departmentData ? (
             <Bar data={departmentData} options={{ responsive: true }} />
           ) : (
-            <p className="text-sm text-gray-500">Loading chart...</p>
+            <p className="text-sm text-gray-500 dark:text-gray-300">Loading chart...</p>
           )}
         </div>
 
-        <div className="bg-white p-6 rounded-2xl border border-blue-100 shadow-lg hover:shadow-xl transition">
-          <h2 className="text-lg font-semibold mb-4 text-[#1D4ED8]">
+        <div className="bg-white dark:bg-gray-900 p-6 rounded-2xl border border-blue-100 dark:border-gray-700 shadow-lg hover:shadow-xl transition">
+          <h2 className="text-lg font-semibold mb-4 text-[#1D4ED8] dark:text-blue-400">
             📌 Bookmark Trends (Mocked)
           </h2>
           <Line data={bookmarkData} options={{ responsive: true }} />

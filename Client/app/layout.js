@@ -1,15 +1,21 @@
+'use client'
+
 import './globals.css'
 import Navbar from '../component/Navbar'
 import Sidebar from '../component/Sidebar'
-
-export const metadata = {
-  title: 'HR Dashboard',
-  description: 'Track and manage employee performance',
-}
+import { useEffect, useState } from 'react'
 
 export default function RootLayout({ children }) {
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    const theme = localStorage.getItem('theme') || 'light'
+    setIsDark(theme === 'dark')
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+  }, [])
+
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={isDark ? 'dark' : ''}>
       <body className="min-h-screen bg-white text-black dark:bg-black dark:text-white">
         <div className="flex h-screen">
           <Sidebar />

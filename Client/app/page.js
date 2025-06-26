@@ -48,18 +48,19 @@ export default function Home() {
   const departments = [...new Set(users.map((u) => u.department))]
   const ratings = [1, 2, 3, 4, 5]
 
-  const usersPerPage = 6
+  const usersPerPage = 20 // changed from 6 to 20
   const [currentPage, setCurrentPage] = useState(1)
   const totalPages = Math.ceil(filteredUsers.length / usersPerPage)
   const startIndex = (currentPage - 1) * usersPerPage
   const currentUsers = filteredUsers.slice(startIndex, startIndex + usersPerPage)
 
-  if (loading) return <div className="text-center mt-10 text-black ">Loading users...</div>
+  if (loading) return <div className="text-center mt-10 text-black">Loading users...</div>
   if (error) return <div className="text-center text-red-500">{error}</div>
 
   return (
     <div className="space-y-6 min-h-screen bg-white dark:bg-[#121212] p-4 text-black dark:text-white">
       <div className="p-2 rounded-xl flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        {/* Search Input */}
         <div className="relative w-full sm:w-1/2">
           <Search className="absolute left-2 top-2.5 text-gray-400" size={18} />
           <input
@@ -74,17 +75,21 @@ export default function Home() {
           />
         </div>
 
+        {/* Department Filter */}
         <div className="relative w-full sm:w-1/4">
           <Building2 className="absolute left-3 top-2.5 text-gray-400" size={18} />
           <select
             className="w-full pl-10 pr-4 py-2 rounded-lg text-black dark:text-white border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#1f1f1f]"
-            value={filterDept[0] || ''}
+            value={filterDept[0] || 'placeholder'}
             onChange={(e) => {
-              setFilterDept(e.target.value === 'ALL' ? [] : [e.target.value])
+              const value = e.target.value
+              setFilterDept(value === 'ALL' ? [] : [value])
               setCurrentPage(1)
             }}
           >
-            <option value="" disabled>Filter by Department</option>
+            <option value="placeholder" disabled hidden>
+              Filter by Department
+            </option>
             <option value="ALL">All</option>
             {departments.map((dept) => (
               <option key={dept} value={dept}>{dept}</option>
@@ -92,17 +97,21 @@ export default function Home() {
           </select>
         </div>
 
+        {/* Rating Filter */}
         <div className="relative w-full sm:w-1/4">
           <Star className="absolute left-3 top-2.5 text-gray-400" size={18} />
           <select
             className="w-full pl-10 pr-4 py-2 rounded-lg text-black dark:text-white border border-gray-300 dark:border-gray-600 bg-white dark:bg-[#1f1f1f]"
-            value={filterRating[0] || ''}
+            value={filterRating[0] || 'placeholder'}
             onChange={(e) => {
-              setFilterRating(e.target.value === 'ALL' ? [] : [Number(e.target.value)])
+              const value = e.target.value
+              setFilterRating(value === 'ALL' ? [] : [Number(value)])
               setCurrentPage(1)
             }}
           >
-            <option value="" disabled>Filter by Rating</option>
+            <option value="placeholder" disabled hidden>
+              Filter by Rating
+            </option>
             <option value="ALL">All</option>
             {ratings.map((r) => (
               <option key={r} value={r}>{r} Star</option>
@@ -111,6 +120,7 @@ export default function Home() {
         </div>
       </div>
 
+      {/* User Cards */}
       <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {currentUsers.length === 0 ? (
           <p className="text-gray-500 text-center col-span-full">No matching users.</p>
@@ -121,6 +131,7 @@ export default function Home() {
         )}
       </section>
 
+      {/* Pagination */}
       {totalPages > 1 && (
         <div className="flex justify-center items-center gap-2 mt-6 flex-wrap text-sm">
           <button

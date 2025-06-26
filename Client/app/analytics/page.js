@@ -1,4 +1,3 @@
-// app/analytics/page.js
 import ChartClient from "./chartClient"
 
 export default async function AnalyticsPage() {
@@ -13,8 +12,8 @@ export default async function AnalyticsPage() {
   }))
 
   return (
-    <div className="p-6 space-y-8 bg-[#F9FAFB] text-black rounded-2xl min-h-screen">
-      <h1 className="text-3xl font-extrabold text-center text-[#1D4ED8]">
+    <div className="p-6 space-y-8 bg-[#F9FAFB] dark:bg-gray-900 text-black dark:text-white rounded-2xl min-h-screen">
+      <h1 className="text-3xl font-extrabold text-center text-[#1D4ED8] dark:text-blue-400">
         📊 Analytics Dashboard
       </h1>
 
