@@ -1,20 +1,19 @@
-# 💼 Mini HR Performance Dashboard
+# 💼 HR Dashboard
 
 A responsive and feature-rich HR Dashboard built with **Next.js App Router**, **Tailwind CSS**, and **Chart.js**. It helps HR managers track employee performance, bookmark top talent, and gain insights through interactive charts.
 
 ---
-
 ## 🚀 Live Demo & Preview
 
 🔗 **Deployed App**: [https://hr-matrix-flame.vercel.app/login](https://hr-matrix-flame.vercel.app/login)
 
 🎥 **Screen Recording**:  
-[![Watch the video](https://img.youtube.com/vi/YOUTUBE_VIDEO_ID/hqdefault.jpg)](https://www.youtube.com/watch?v=YOUTUBE_VIDEO_ID)
+[![Watch the video](https://img.youtube.com/vi/abc123XYZ/hqdefault.jpg)](https://www.youtube.com/watch?v=abc123XYZ)
 
 
 ## 🧰 Tech Stack
 
-- ⚡ **Next.js (App Router)**
+- ⚡ **Next.js **
 - 🎨 **Tailwind CSS**
 - 📊 **Chart.js**
 - 🔐 **Cookie-based Login Authentication**
@@ -28,10 +27,11 @@ A responsive and feature-rich HR Dashboard built with **Next.js App Router**, **
 
 ### ✅ Core Functionalities
 
-- 🔐 **Login System** – Basic cookie-based authentication
-- 🌗 **Dark/Light Mode** toggle
-- 📱 **Responsive Design** (Mobile to Desktop)
-- ✨ **Form Validations** – On login and user creation
+- **Login System** – Basic cookie-based authentication
+- **Dark/Light Mode** toggle
+- **Responsive Design** (Mobile to Desktop)
+- **Form Validations** – On login and user creation
+-  **Pagination** Paginated employee list (mocked logic or custom hook)
 
 ### 👩‍💼 Employee Dashboard (`/`)
 - Displays employee cards with Name, Email, Age, Department
@@ -60,8 +60,7 @@ A responsive and feature-rich HR Dashboard built with **Next.js App Router**, **
 - Add new employees via form
 - Form includes validations
 
-### 🔁 Pagination (Bonus)
-- Paginated employee list (mocked logic or custom hook)
+
 
 ---
 
