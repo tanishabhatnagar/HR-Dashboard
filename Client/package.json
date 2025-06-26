@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
+    "build": "next build",
     "start": "next start",
-    "export": "next export",
     "lint": "next lint"
   },
   "dependencies": {
+    "@netlify/plugin-nextjs": "^5.11.4",
     "chart.js": "^4.5.0",
     "lucide-react": "^0.523.0",
     "next": "15.3.4",
