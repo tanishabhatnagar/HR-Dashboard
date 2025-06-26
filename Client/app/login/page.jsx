@@ -1,7 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import Cookies from 'js-cookie'
 
 export default function LoginPage() {
   const router = useRouter()
@@ -9,13 +8,18 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault()
-    if (email && password) {
-      Cookies.set('auth', 'true', { expires: 1 }) 
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      body: JSON.stringify({ email, password }),
+    })
+
+    if (res.ok) {
+      router.refresh() // ← This triggers middleware to re-check cookie
       router.push('/')
     } else {
-      setError('Please enter email and password')
+      setError('Invalid credentials')
     }
   }
 
@@ -31,19 +35,17 @@ export default function LoginPage() {
         <input
           type="email"
           placeholder="Email"
-          className="w-full p-2 border border-gray-300 rounded dark:bg-gray-800 dark:border-gray-700"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded dark:bg-gray-800 dark:border-gray-700"
         />
-
         <input
           type="password"
           placeholder="Password"
-          className="w-full p-2 border border-gray-300 rounded dark:bg-blue-800 dark:border-blue-700"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
+          className="w-full p-2 border border-gray-300 rounded dark:bg-blue-800 dark:border-blue-700"
         />
-
         <button
           type="submit"
           className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded"
