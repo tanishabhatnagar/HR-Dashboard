@@ -1,7 +1,7 @@
 'use client'
 import { Sun, Moon } from 'lucide-react'
 import { useEffect, useState } from 'react'
-import withAuth from './authWrapper'
+
 
 
 
@@ -62,4 +62,4 @@ const toggleTheme = () => {
   )
 }
 
-export default withAuth(Navbar)
+export default Navbar

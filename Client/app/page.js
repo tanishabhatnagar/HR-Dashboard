@@ -4,7 +4,7 @@ import UserCard from '../component/Usercard'
 import useSearch from '../hooks/useSearch'
 import { Search, Star, Building2 } from 'lucide-react'
 import Loading from '../component/Loading'
-import withAuth from '../component/authWrapper'
+
 
 
 
@@ -181,4 +181,4 @@ if (loading) return <Loading />
     </div>
   )
 }
-export default withAuth(Home)
+export default Home
