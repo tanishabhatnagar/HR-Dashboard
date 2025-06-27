@@ -1,7 +1,6 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
-import Cookies from 'js-cookie' // ✅ Add this
 
 export default function LoginPage() {
   const router = useRouter()
@@ -9,19 +8,30 @@ export default function LoginPage() {
   const [password, setPassword] = useState('')
   const [error, setError] = useState('')
 
-  const handleLogin = async (e) => {
-    e.preventDefault()
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      body: JSON.stringify({ email, password }),
-    })
+  const validateEmail = (email) => {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return regex.test(email)
+  }
 
-    if (res.ok) {
-      Cookies.set('auth', 'true')  // ✅ Client-side cookie
-      router.push('/')             // ✅ Redirect immediately
-    } else {
-      setError('Invalid credentials')
+  const handleLogin = (e) => {
+    e.preventDefault()
+
+    if (!email || !password) {
+      setError('Both fields are required')
+      return
     }
+
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address')
+      return
+    }
+
+    // ✅ Save to localStorage
+    localStorage.setItem('userEmail', email)
+    localStorage.setItem('userPassword', password)
+
+    // ✅ Redirect
+    router.push('/')
   }
 
   return (

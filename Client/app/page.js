@@ -4,10 +4,11 @@ import UserCard from '../component/Usercard'
 import useSearch from '../hooks/useSearch'
 import { Search, Star, Building2 } from 'lucide-react'
 import Loading from '../component/Loading'
+import withAuth from '../component/authWrapper'
 
 
 
-export default function Home() {
+function Home() {
   const [users, setUsers] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
@@ -180,3 +181,4 @@ if (loading) return <Loading />
     </div>
   )
 }
+export default withAuth(Home)

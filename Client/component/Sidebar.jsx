@@ -1,27 +1,43 @@
 'use client'
-
 import Link from 'next/link'
-import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
+import { useEffect, useState } from 'react'
 import {
   LayoutDashboard,
   Bookmark,
   BarChart2,
   Menu,
   X,
-  UserPlus, 
+  UserPlus,
 } from 'lucide-react'
 
 export default function Sidebar() {
   const pathname = usePathname()
+  const router = useRouter()
   const [open, setOpen] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+
+  useEffect(() => {
+    const email = localStorage.getItem('userEmail')
+    const password = localStorage.getItem('userPassword')
+    if (email && password) setIsLoggedIn(true)
+  }, [])
 
   const navItems = [
     { href: '/', label: 'Dashboard', icon: LayoutDashboard },
     { href: '/bookmarks', label: 'Bookmarks', icon: Bookmark },
     { href: '/analytics', label: 'Analytics', icon: BarChart2 },
-    { href: '/create-user', label: 'Create User', icon: UserPlus }, 
+    { href: '/create-user', label: 'Create User', icon: UserPlus },
   ]
+
+  const handleNavClick = (href) => {
+    if (!isLoggedIn) {
+      router.push('/login')
+    } else {
+      setOpen(false)
+      router.push(href)
+    }
+  }
 
   return (
     <>
@@ -30,7 +46,11 @@ export default function Sidebar() {
           onClick={() => setOpen(!open)}
           className="bg-white dark:bg-gray-800 p-2 rounded-md shadow-md border border-gray-300 dark:border-gray-700"
         >
-          {open ? <X size={20} className="text-black dark:text-white" /> : <Menu size={20} className="text-black dark:text-white" />}
+          {open ? (
+            <X size={20} className="text-black dark:text-white" />
+          ) : (
+            <Menu size={20} className="text-black dark:text-white" />
+          )}
         </button>
       </div>
 
@@ -43,11 +63,10 @@ export default function Sidebar() {
             const isActive = pathname === href
 
             return (
-              <Link
+              <button
                 key={href}
-                href={href}
-                onClick={() => setOpen(false)}
-                className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors
+                onClick={() => handleNavClick(href)}
+                className={`flex items-center gap-3 px-4 py-3 rounded-lg font-medium transition-colors w-full text-left
                   ${
                     isActive
                       ? 'bg-blue-600 text-white shadow'
@@ -63,10 +82,8 @@ export default function Sidebar() {
                       : 'text-gray-600 dark:text-gray-400'
                   }
                 />
-                <span>
-                  {label}
-                </span>
-              </Link>
+                <span>{label}</span>
+              </button>
             )
           })}
         </div>

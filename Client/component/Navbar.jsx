@@ -1,8 +1,12 @@
 'use client'
-import { PlusCircle, Sun, Moon } from 'lucide-react'
+import { Sun, Moon } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import withAuth from './authWrapper'
 
-export default function Navbar() {
+
+
+
+ function Navbar() {
   const [showModal, setShowModal] = useState(false)
   const [darkMode, setDarkMode] = useState(false)
 
@@ -57,3 +61,5 @@ const toggleTheme = () => {
     </>
   )
 }
+
+export default withAuth(Navbar)

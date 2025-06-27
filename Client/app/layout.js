@@ -4,8 +4,9 @@ import './globals.css'
 import Navbar from '../component/Navbar'
 import Sidebar from '../component/Sidebar'
 import { useEffect, useState } from 'react'
+import withAuth from '../component/authWrapper'
 
-export default function RootLayout({ children }) {
+ function RootLayout({ children }) {
   const [isDark, setIsDark] = useState(false)
 
   useEffect(() => {
@@ -30,3 +31,5 @@ export default function RootLayout({ children }) {
     </html>
   )
 }
+
+export default withAuth(RootLayout)
