@@ -1,6 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
 import { useState } from 'react'
+import Cookies from 'js-cookie' // ✅ Add this
 
 export default function LoginPage() {
   const router = useRouter()
@@ -16,8 +17,8 @@ export default function LoginPage() {
     })
 
     if (res.ok) {
-      router.refresh() // ← This triggers middleware to re-check cookie
-      router.push('/')
+      Cookies.set('auth', 'true')  // ✅ Client-side cookie
+      router.push('/')             // ✅ Redirect immediately
     } else {
       setError('Invalid credentials')
     }

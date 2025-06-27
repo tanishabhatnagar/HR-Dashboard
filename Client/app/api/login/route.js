@@ -8,10 +8,10 @@ export async function POST(req) {
   if (email && password) {
     const res = NextResponse.json({ success: true })
     res.cookies.set('auth', 'true', {
-      httpOnly: true,
-      path: '/',
-      maxAge: 60 * 60 * 24,
-    })
+  path: '/', 
+  maxAge: 60 * 60 * 24,
+})
+
     return res
   }
 

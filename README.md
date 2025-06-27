@@ -1,6 +1,6 @@
 # 💼 HR Dashboard
 
-A responsive and feature-rich HR Dashboard built with **Next.js App Router**, **Tailwind CSS**, and **Chart.js**. It helps HR managers track employee performance, bookmark top talent, and gain insights through interactive charts.
+A responsive and feature-rich HR Dashboard built with **Next.js**, **Tailwind CSS**, and **Chart.js**. It helps HR managers track employee performance, bookmark top talent, and gain insights through interactive charts.
 
 ---
 ## 🚀 Live Demo & Preview
@@ -15,7 +15,7 @@ A responsive and feature-rich HR Dashboard built with **Next.js App Router**, **
 - **Next.js**
 - **Tailwind CSS**
 - **Chart.js**
-- **Cookie-based Login Authentication**
+- **Login Authentication**
 - **Dark/Light Mode Support**
 - **Context API for State Management**
 - **Reusable Components & Custom Hooks**
@@ -30,7 +30,7 @@ A responsive and feature-rich HR Dashboard built with **Next.js App Router**, **
 - **Dark/Light Mode** toggle
 - **Responsive Design** (Mobile to Desktop)
 - **Form Validations** – On login and user creation
--  **Pagination** Paginated employee list (mocked logic or custom hook)
+-  **Pagination** Paginated employee list 
 
 ### 👩‍💼 Employee Dashboard (`/`)
 - Displays employee cards with Name, Email, Age, Department
@@ -42,12 +42,12 @@ A responsive and feature-rich HR Dashboard built with **Next.js App Router**, **
 - Filter by department & performance rating
 
 ### 👤 Employee Details Page (`/employee/[id]`)
-- Tabs: Overview, Projects, Feedback (mocked)
+- Tabs: Overview, Projects, Feedback 
 - Shows bio, address, phone, history with badges
 
 ### 📌 Bookmark Manager (`/bookmarks`)
 - Manage all bookmarked employees
-- Remove from bookmarks or trigger UI actions
+- Add or Remove from bookmarks 
 
 ### 📊 Analytics Dashboard (`/analytics`)
 - Charts showing:
@@ -68,7 +68,7 @@ A responsive and feature-rich HR Dashboard built with **Next.js App Router**, **
 ```bash
 # Clone the repo
 git clone https://github.com/your-username/hr-dashboard.git
-cd hr-dashboard
+cd hr-dashboard/Client
 
 # Install dependencies
 npm install
