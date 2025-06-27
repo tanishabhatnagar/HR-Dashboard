@@ -7,7 +7,11 @@ A responsive and feature-rich HR Dashboard built with **Next.js**, **Tailwind CS
 
 🔗 **Deployed App**: [https://hr-matrix-flame.vercel.app](https://hr-matrix-flame.vercel.app)
 
-🎥 **Screen Recording**: [![Watch the video](https://www.youtube.com/watch?v=6EXQbavIgrc)](https://www.youtube.com/watch?v=6EXQbavIgrcZ)
+## 🎥  Demo Video
+<a href="https://youtu.be/6EXQbavIgrc" target="_blank">
+  <img src="https://img.youtube.com/vi/6EXQbavIgrc/sddefault.jpg" alt="Watch the video" width="600">
+</a>
+
 
 
 ## 🧰 Tech Stack
@@ -15,7 +19,6 @@ A responsive and feature-rich HR Dashboard built with **Next.js**, **Tailwind CS
 - **Next.js**
 - **Tailwind CSS**
 - **Chart.js**
-- **Login Authentication**
 - **Dark/Light Mode Support**
 - **Context API for State Management**
 - **Reusable Components & Custom Hooks**
@@ -26,7 +29,6 @@ A responsive and feature-rich HR Dashboard built with **Next.js**, **Tailwind CS
 
 ### ✅ Core Functionalities
 
-- **Login System** – Basic cookie-based authentication
 - **Dark/Light Mode** toggle
 - **Responsive Design** (Mobile to Desktop)
 - **Form Validations** – On login and user creation
